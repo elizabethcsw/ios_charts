@@ -7,9 +7,46 @@
 //
 
 import UIKit
+import Charts
 
 class ViewController: UIViewController {
+    
+    var numArray: [Double] = []
+    var dateArray: [String] = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+    
 
+    @IBAction func submit(_ sender: Any) {
+        let numDouble = Double(textInput.text!)
+        numArray.append(numDouble!)
+        updateGraph()
+    }
+    
+    func updateGraph() {
+        var lineChartEntry = [ChartDataEntry]()
+        
+        for i in 0..<numArray.count{
+           let value = ChartDataEntry(x: Double(i), y: numArray[i])
+            lineChartEntry.append(value)
+        }
+
+        
+        let line1 = LineChartDataSet(values: lineChartEntry, label: "Mood")
+        
+        line1.colors = [NSUIColor.red]
+        
+        let data = LineChartData()
+        
+        data.addDataSet(line1)
+        
+        chtChart.data = data
+        
+        
+    }
+    
+    @IBOutlet weak var chtChart: LineChartView!
+    
+    @IBOutlet weak var textInput: UITextField!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
