@@ -13,11 +13,19 @@ class ViewController: UIViewController {
     
     var numArray: [Double] = []
     var dateArray: [String] = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+
+    var date2Array: [String] = []
     
 
     @IBAction func submit(_ sender: Any) {
         let numDouble = Double(textInput.text!)
         numArray.append(numDouble!)
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat="dd MMM"
+        let result = formatter.string(from: date)
+        print(result)
+        date2Array.append(result)
         updateGraph()
     }
     
@@ -28,6 +36,13 @@ class ViewController: UIViewController {
            let value = ChartDataEntry(x: Double(i), y: numArray[i])
             lineChartEntry.append(value)
         }
+        
+//        lineChartEntry = [ChartDataEntry(x: 0.0, y: 2.0)]
+        print("look here.............................")
+
+        print(lineChartEntry)
+        
+ 
 
         
         let line1 = LineChartDataSet(values: lineChartEntry, label: "Mood")
@@ -39,6 +54,11 @@ class ViewController: UIViewController {
         data.addDataSet(line1)
         
         chtChart.data = data
+    
+        
+        chtChart.xAxis.valueFormatter = IndexAxisValueFormatter(values:date2Array)
+        chtChart.xAxis.granularity = 1
+
         
         
     }
