@@ -30,26 +30,26 @@ class ViewController: UIViewController {
     }
     
     func updateGraph() {
-        var lineChartEntry = [ChartDataEntry]()
+        var barChartEntry = [BarChartDataEntry]()
         
         for i in 0..<numArray.count{
-           let value = ChartDataEntry(x: Double(i), y: numArray[i])
-            lineChartEntry.append(value)
+           let value = BarChartDataEntry(x: Double(i), y: numArray[i])
+            barChartEntry.append(value)
         }
         
 //        lineChartEntry = [ChartDataEntry(x: 0.0, y: 2.0)]
         print("look here.............................")
 
-        print(lineChartEntry)
+        print(barChartEntry)
         
  
 
         
-        let line1 = LineChartDataSet(values: lineChartEntry, label: "Mood")
+        let line1 = BarChartDataSet(values: barChartEntry, label: "Mood")
         
         line1.colors = [NSUIColor.red]
         
-        let data = LineChartData()
+        let data = BarChartData()
         
         data.addDataSet(line1)
         
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         
     }
     
-    @IBOutlet weak var chtChart: LineChartView!
+    @IBOutlet weak var chtChart: BarChartView!
     
     @IBOutlet weak var textInput: UITextField!
         
