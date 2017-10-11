@@ -47,15 +47,66 @@ class ViewController: UIViewController {
         
         let line1 = LineChartDataSet(values: lineChartEntry, label: "Mood")
         
-        line1.colors = [NSUIColor.red]
+        line1.colors = [NSUIColor.green]
         line1.mode = .cubicBezier
+        
+        line1.lineWidth = 5.0
+        line1.valueColors = [NSUIColor.orange]
+        line1.drawValuesEnabled = false
+        
+        //remove coordinate circles
         line1.circleRadius = 0
+        
+        //remove xAxis gridlines
+        chtChart.xAxis.drawGridLinesEnabled = false
+        
+        //remove yAxis gridlines
+        chtChart.leftAxis.drawGridLinesEnabled = false
+        chtChart.rightAxis.drawGridLinesEnabled = false
+        
+//        chtChart.leftAxis.drawZeroLineEnabled = true
+        
+        //remove xAxis
+        chtChart.xAxis.drawAxisLineEnabled = false
+        
+        //keep left xAxis
+        chtChart.leftAxis.drawAxisLineEnabled = true
+        chtChart.rightAxis.drawAxisLineEnabled = false
+        
+        //remove description
+        chtChart.chartDescription?.text = ""
+        
+        // label at the bottom
+        chtChart.xAxis.labelPosition = XAxis.LabelPosition.bottom
+        
+        // fill in area below line
+        line1.drawFilledEnabled = true
+        line1.fillColor = NSUIColor.green
+        line1.fillAlpha = 1.0
+        
+        //remove label and color block
+
+        // remove right y axis
+        chtChart.rightAxis.enabled = false
+        
+        // pinch zoom enabled
+        chtChart.pinchZoomEnabled = true
+        
+        // font size of x and y axis labels
+        chtChart.xAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size: 10)!
+        chtChart.leftAxis.labelFont = UIFont(name: "HelveticaNeue-Light", size: 10)!
+
         
         let data = LineChartData()
         
         data.addDataSet(line1)
         
         chtChart.data = data
+        
+        // make sure x axis labels are visible
+        chtChart.xAxis.avoidFirstLastClippingEnabled = true
+        
+//        chtChart.setVisibleYRangeMaximum(<#T##maxYRange: Double##Double#>, axis: <#T##YAxis.AxisDependency#>)
     
         
         chtChart.xAxis.valueFormatter = IndexAxisValueFormatter(values:date2Array)
